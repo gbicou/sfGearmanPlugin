@@ -1,3 +1,5 @@
+# default server configuration
 all:
   server:
-    default: ~
+    default: ~ # = GEARMAN_DEFAULT_TCP_HOST:GEARMAN_DEFAULT_TCP_PORT
+
