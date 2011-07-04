@@ -48,7 +48,7 @@ catch(sfConfigurationException $e)
   $t->pass('::getDoctrine() non existant key raises an exception');
 }
 
-class testGearmanConnection implements sfGearmanConnection
+class testGearmanConnection
 {
   public $servers = array();
   public $options = 0;

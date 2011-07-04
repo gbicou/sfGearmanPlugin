@@ -77,12 +77,12 @@ abstract class sfGearman
   /**
    * Configure a gearman connection with parameters from gearman.yml
    *
-   * @param sfGearmanConnection $connection
+   * @param sfGearmanWorker|sfGearmanClient $connection
    * @param string              $server Optional, defaults to null.
    *
    * @return void
    */
-  public static function setupConnection(sfGearmanConnection $connection, $server = null)
+  public static function setupConnection($connection, $server = null)
   {
     self::addServer($connection, self::getServer($server));
   }
@@ -113,12 +113,12 @@ abstract class sfGearman
   /**
    * Add servers to GearmanClient or GearmanWorker
    *
-   * @param sfGearmanConnection $connection
+   * @param sfGearmanWorker|sfGearmanClient $connection
    * @param mixed               $params
    *
    * @return void
    */
-  public static function addServer(sfGearmanConnection $connection, $params)
+  public static function addServer($connection, $params)
   {
     if ($params === null)
     {

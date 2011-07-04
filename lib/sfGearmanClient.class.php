@@ -4,13 +4,12 @@
  * Gearman client
  *
  * @uses      GearmanClient
- * @uses      sfGearmanConnection
  * @package   sfGearmanPlugin
  * @author    Benjamin VIELLARD <bicou@bicou.com>
  * @license   The MIT License
  * @version   SVN: $Id$
  */
-class sfGearmanClient extends GearmanClient implements sfGearmanConnection
+class sfGearmanClient extends GearmanClient
 {
   /**
    * Array of instances

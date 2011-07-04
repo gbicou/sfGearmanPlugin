@@ -4,13 +4,12 @@
  * Gearman worker
  *
  * @uses GearmanWorker
- * @uses sfGearmanConnection
  * @package   sfGearmanPlugin
  * @author    Benjamin VIELLARD <bicou@bicou.com>
  * @license   The MIT License
  * @version   SVN: $Id$
  */
-class sfGearmanWorker extends GearmanWorker implements sfGearmanConnection
+class sfGearmanWorker extends GearmanWorker
 {
   /**
    * Parameters
