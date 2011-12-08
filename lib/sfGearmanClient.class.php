@@ -58,7 +58,7 @@ class sfGearmanClient extends GearmanClient
    *
    * @return string Gearman result of task
    */
-  public function task($function, $workload = '', $options = null)
+  public function task($function, $workload = '', $options = null, $unique = null)
   {
     // gearman module method
     $method = 'do';
@@ -82,7 +82,11 @@ class sfGearmanClient extends GearmanClient
     do
     {
       // call gearman module method
-      $result = @call_user_func(array($this, $method), $function, $workload);
+      if (null !== $unique) {
+          $result = @call_user_func(array($this, $method), $function, $workload, $unique);
+      } else {
+          $result = @call_user_func(array($this, $method), $function, $workload);
+      }
 
       // check return code
       switch ($this->returnCode())
@@ -124,9 +128,9 @@ class sfGearmanClient extends GearmanClient
    *
    * @return string Gearman result of task
    */
-  public function background($function, $workload = '', $options = null)
+  public function background($function, $workload = '', $options = null, $unique  = null)
   {
-    return $this->task($function, $workload, $options | sfGearman::BACKGROUND);
+    return $this->task($function, $workload, $options | sfGearman::BACKGROUND, $unique);
   }
 }
 
