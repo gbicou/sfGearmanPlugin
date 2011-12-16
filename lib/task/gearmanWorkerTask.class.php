@@ -17,7 +17,7 @@ class gearmanWorkerTask extends sfGearmanWorkerBaseTask
       new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'frontend'),
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'prod'),
       new sfCommandOption('debug', null, sfCommandOption::PARAMETER_NONE, 'Debug environment flag'),
-      new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine'),
+      new sfCommandOption('connection', null, sfCommandOption::PARAMETER_OPTIONAL, 'The connection name', null),
 
       new sfCommandOption('server', null, sfCommandOption::PARAMETER_OPTIONAL, 'Gearman job server config key'),
       new sfCommandOption('count', null, sfCommandOption::PARAMETER_REQUIRED, 'Number of jobs for worker to run before exiting', 100),
@@ -47,8 +47,11 @@ EOF;
     sfContext::createInstance($configuration, 'default');
 
     // initialize the database connection
-    $databaseManager = new sfDatabaseManager($this->configuration);
-    $connection = $databaseManager->getDatabase($options['connection'] ? $options['connection'] : null)->getConnection();
+    if($options['connection'] !== null)
+    {
+      $databaseManager = new sfDatabaseManager($this->configuration);
+      $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
+    }
 
     // connect to gearman events
     $this->connectGearmanEvents();
