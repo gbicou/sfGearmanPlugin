@@ -140,7 +140,7 @@ class sfGearmanWorker extends GearmanWorker
     {
       $iteration++;
 
-      @$this->work();
+      $this->work();
 
       $code = $this->returnCode();
 
