@@ -103,6 +103,8 @@ class sfGearmanWorker extends GearmanWorker
       $context = $this;
     }
 
+    $function = sfGearman::getNamespace() ? $function. '@'. sfGearman::getNamespace() : $function;
+
     return parent::addFunction($function, $callback, &$context, $timeout);
   }
 

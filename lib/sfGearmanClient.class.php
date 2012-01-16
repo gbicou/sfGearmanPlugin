@@ -81,6 +81,8 @@ class sfGearmanClient extends GearmanClient
 
     do
     {
+      $function = sfGearman::getNamespace() ? $function. '@'. sfGearman::getNamespace() : $function;
+
       // call gearman module method
       if (null !== $unique) {
           $result = @call_user_func(array($this, $method), $function, $workload, $unique);
