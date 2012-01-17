@@ -58,6 +58,16 @@ abstract class sfGearman
   }
 
   /**
+   * Namespace to suffix function on a mutialized gearman
+   *
+   * @return string
+   */
+  public static function getNamespace()
+  {
+      return isset(self::$config['namespace']) ? self::$config['namespace'] : '';
+  }
+
+  /**
    * doctrine worker configuration array by key name
    *
    * @param string $name gearman.yml key
