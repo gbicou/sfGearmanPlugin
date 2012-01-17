@@ -34,8 +34,7 @@ EOF;
 
   protected function execute($arguments = array(), $options = array())
   {
-    $configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], true);
-    sfContext::createInstance($configuration, 'default');
+    sfContext::createInstance($this->configuration);
 
     // initialize the database connection
     $databaseManager = new sfDatabaseManager($this->configuration);

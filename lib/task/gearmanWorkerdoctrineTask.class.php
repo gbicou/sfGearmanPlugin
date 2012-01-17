@@ -45,8 +45,7 @@ EOF;
     $this->command_options = $options;
 
     // create context
-    $configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], $options['debug']);
-    sfContext::createInstance($configuration, 'default');
+    sfContext::createInstance($this->configuration);
 
     // initialize the database connection
     $databaseManager = new sfDatabaseManager($this->configuration);
