@@ -18,6 +18,13 @@ class sfGearmanQueue
   const PREFIX = 'queue.';
 
   /**
+   * last element retrieved
+   * 
+   * @var mixed
+   */
+  protected static $data = null;
+
+  /**
    * Gearman function name from queue name
    *
    * @param string $queue Queue name
@@ -61,13 +68,16 @@ class sfGearmanQueue
     $worker = new sfGearmanWorker(array('server' => $server));
 
     // attach function callback and receive queue message as context
-    $worker->addFunction(self::getFunctionName($queue), array(__CLASS__, 'work'), &$data);
+    $worker->addFunction(self::getFunctionName($queue), array(__CLASS__, 'work'));
+
+    // init worker data
+    self::$data = null;
 
     // work the worker once only
     $worker->loop(1, $timeout);
 
     // return worker data
-    return $data;
+    return self::$data;
   }
 
   /**
@@ -78,10 +88,10 @@ class sfGearmanQueue
    *
    * @return boolean   always true
    */
-  public static function work($job, $data = null)
+  public static function work($job)
   {
     // just unserialize workload
-    $data = unserialize($job->workload());
+    self::$data = unserialize($job->workload());
     return true;
   }
 }
