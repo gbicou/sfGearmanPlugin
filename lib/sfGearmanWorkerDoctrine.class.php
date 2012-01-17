@@ -110,7 +110,8 @@ class sfGearmanWorkerDoctrine extends sfGearmanWorker
     $this->notifyEventJob($job);
 
     // extract model and method from gearman function name
-    list($model, $method) = explode('.', $job->functionName());
+    list($root,) = explode('@', $job->functionName());
+    list($model, $method) = explode('.', $root);
 
     // unserialize workload
     $workload = unserialize($job->workload());
