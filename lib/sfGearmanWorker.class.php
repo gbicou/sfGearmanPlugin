@@ -105,7 +105,7 @@ class sfGearmanWorker extends GearmanWorker
 
     $function = sfGearman::getNamespace() ? $function. '@'. sfGearman::getNamespace() : $function;
 
-    return parent::addFunction($function, $callback, &$context, $timeout);
+    return parent::addFunction($function, $callback, $context, $timeout);
   }
 
   /**
